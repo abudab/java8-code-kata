@@ -30,8 +30,10 @@ public class Exercise5Test extends ClassicOnlineStore {
          */
         List<String> nameList = null;
 
+        nameList = customerList.stream().map(customer -> customer.getName()).collect(Collectors.toList());
+
         assertThat(nameList, contains("Joe", "Steven", "Patrick", "Diana", "Chris", "Kathy", "Alice", "Andrew",
-                                      "Martin", "Amy"));
+                "Martin", "Amy"));
     }
 
     @Easy @Test
@@ -42,6 +44,7 @@ public class Exercise5Test extends ClassicOnlineStore {
          * Create a set of customer age by using {@link Stream#collect} and {@link Collectors#toSet}
          */
         Set<Integer> ageSet = null;
+        ageSet=customerList.stream().map(customer -> customer.getAge()).collect(Collectors.toSet());
 
         assertThat(ageSet, hasSize(9));
         assertThat(ageSet, hasItems(21, 22, 26, 27, 28, 32, 35, 36, 38));
@@ -56,6 +59,8 @@ public class Exercise5Test extends ClassicOnlineStore {
          */
         String string = null;
 
+        string = customerList.stream().map(customer -> customer.getName()).collect(Collectors.joining(",", "[","]"));
+
         assertThat(string, is("[Joe,Steven,Patrick,Diana,Chris,Kathy,Alice,Andrew,Martin,Amy]"));
     }
 
@@ -68,7 +73,8 @@ public class Exercise5Test extends ClassicOnlineStore {
          * Don't use any intermediate operations.
          */
         Optional<Customer> oldestCustomer = null;
-
+        oldestCustomer = customerList.stream().collect(Collectors.maxBy((o1, o2) -> o1.getAge()-o2.getAge()));
+        System.out.println(customerList.get(3).getAge());
         assertThat(oldestCustomer.get(), is(customerList.get(3)));
     }
 

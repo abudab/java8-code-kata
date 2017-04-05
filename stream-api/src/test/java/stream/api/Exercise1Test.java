@@ -30,6 +30,9 @@ public class Exercise1Test extends ClassicOnlineStore {
         Predicate<Customer> richCustomerCondition = null;
         Stream<Customer> richCustomerStream = null;
 
+        richCustomerCondition = customer -> customer.getBudget()>10000;
+        richCustomerStream = customerList.stream().filter(richCustomerCondition);
+
         assertTrue("Solution for Predicate should be lambda expression", AssertUtil.isLambda(richCustomerCondition));
         List<Customer> richCustomer = richCustomerStream.collect(Collectors.toList());
         assertThat(richCustomer, hasSize(2));
@@ -47,6 +50,10 @@ public class Exercise1Test extends ClassicOnlineStore {
          */
         Function<Customer, Integer> getAgeFunction = null;
         Stream<Integer> ageStream = null;
+
+        getAgeFunction = customer -> customer.getAge();
+        ageStream = customerList.stream().map(getAgeFunction);
+
 
         assertTrue(AssertUtil.isLambda(getAgeFunction));
         List<Integer> richCustomer = ageStream.collect(Collectors.toList());

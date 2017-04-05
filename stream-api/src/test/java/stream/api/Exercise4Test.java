@@ -24,6 +24,7 @@ public class Exercise4Test extends ClassicOnlineStore {
          * The customerList are ascending ordered by registered timing.
          */
         Optional<Customer> firstCustomer = null;
+        firstCustomer = customerList.stream().findFirst();
 
         assertThat(firstCustomer.get(), is(customerList.get(0)));
     }
@@ -37,6 +38,8 @@ public class Exercise4Test extends ClassicOnlineStore {
          */
         boolean olderThan40Exists = true;
 
+        olderThan40Exists = customerList.stream().anyMatch(customer -> customer.getAge()>40);
+
         assertThat(olderThan40Exists, is(false));
     }
 
@@ -48,6 +51,7 @@ public class Exercise4Test extends ClassicOnlineStore {
          * Check whether all customer are older than 20 or not, by using {@link Stream#allMatch}
          */
         boolean allOlderThan20 = false;
+        allOlderThan20 = customerList.stream().allMatch(customer -> customer.getAge() > 20);
 
         assertThat(allOlderThan20, is(true));
     }
@@ -61,6 +65,8 @@ public class Exercise4Test extends ClassicOnlineStore {
          * by using {@link Stream#noneMatch}
          */
         boolean everyoneWantsSomething = false;
+
+        everyoneWantsSomething = customerList.stream().allMatch(customer -> customer.getWantToBuy().size()> 0);
 
         assertThat(everyoneWantsSomething, is(true));
     }
